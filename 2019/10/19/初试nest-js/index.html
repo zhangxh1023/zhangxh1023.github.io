@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="DDLujk2EzEeRti44oESbwKrbmxdJjzThyYhDN3y0cRI">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="惯例一段废话…由于一些不可描述的政策, 一大堆的爬虫相关的公司被请去了喝茶. 由于我们公司非常依赖这些第三方的数据( 剩下的数据是由我们组进行抓取, 提供给自己公司内部使用 ), 所以业务受到了影响…然后裁员bulabulabula….最后我们组就剩我一个人负责爬虫业务喽….刺激. 所以既然只剩我一个人, 感受到了前所未有的忙碌, 紧张, 以及… 自由    所以, 我想剥离出所有的爬虫任务, 作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初试nest.js">
+<meta property="og:url" content="https://zxh.name/2019/10/19/初试nest-js/index.html">
+<meta property="og:site_name" content="啊哦~">
+<meta property="og:description" content="惯例一段废话…由于一些不可描述的政策, 一大堆的爬虫相关的公司被请去了喝茶. 由于我们公司非常依赖这些第三方的数据( 剩下的数据是由我们组进行抓取, 提供给自己公司内部使用 ), 所以业务受到了影响…然后裁员bulabulabula….最后我们组就剩我一个人负责爬虫业务喽….刺激. 所以既然只剩我一个人, 感受到了前所未有的忙碌, 紧张, 以及… 自由    所以, 我想剥离出所有的爬虫任务, 作">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-10-19T08:50:08.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初试nest.js">
+<meta name="twitter:description" content="惯例一段废话…由于一些不可描述的政策, 一大堆的爬虫相关的公司被请去了喝茶. 由于我们公司非常依赖这些第三方的数据( 剩下的数据是由我们组进行抓取, 提供给自己公司内部使用 ), 所以业务受到了影响…然后裁员bulabulabula….最后我们组就剩我一个人负责爬虫业务喽….刺激. 所以既然只剩我一个人, 感受到了前所未有的忙碌, 紧张, 以及… 自由    所以, 我想剥离出所有的爬虫任务, 作">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zxh.name/2019/10/19/初试nest-js/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>初试nest.js | 啊哦~</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">啊哦~</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zxh.name/2019/10/19/初试nest-js/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zxh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="啊哦~">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初试nest.js
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-19 15:39:55 / 修改时间：16:50:08" itemprop="dateCreated datePublished" datetime="2019-10-19T15:39:55+08:00">2019-10-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>惯例一段废话…<br>由于一些不可描述的政策, 一大堆的爬虫相关的公司被请去了喝茶. 由于我们公司非常依赖这些第三方的数据( 剩下的数据是由我们组进行抓取, 提供给自己公司内部使用 ), 所以业务受到了影响…然后裁员bulabulabula….最后我们组就剩我一个人负责爬虫业务喽….刺激. 所以既然只剩我一个人, 感受到了前所未有的忙碌, 紧张, 以及… 自由   </p>
+<p>所以, 我想剥离出所有的爬虫任务, 作为 <code>woker</code>, 分别部署, 再新建一个 <code>server</code> 项目, 统一提供数据接口, 方便管理项目. 你要问我这样子做的好处? 说实话, 真不知道该怎么描述, 但是肯定是比之前的那种几百行代码一个小爬虫, 还用koa简单的写个接口, 这样来的清晰得多.   </p>
+<p>当然了, 其实之前是有类似的一个项目的, 只不过长年累月的更新迭代, 之前的人也都懒得维护, 就东一个接口, 西一个接了…   </p>
+<p>既然只剩我一个人, 那么, 选什么框架, 技术, 都是我自己决定了…所以就在 <code>TS</code> 的前提下, 选择了 <code>Nest.js</code>.   </p>
+<p><code>Nest.js</code> 文档推荐的是基于模块化的开发的. 所以暂定的项目目录:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line"></span><br><span class="line">public</span><br><span class="line"></span><br><span class="line">src</span><br><span class="line">  config</span><br><span class="line">  database</span><br><span class="line">  listenMq</span><br><span class="line">  crawl1</span><br><span class="line">  crawl2</span><br><span class="line">  ...</span><br><span class="line">test</span><br></pre></td></tr></table></figure></p>
+<p>准备好了项目, 看了几天文档, 就可以开始尝试开发了~~.<br>接下来就记录一下, 尝试写 demo 学习的过程中遇到的问题(疑惑)吧.   </p>
+<h2 id="1-连接数据库-mongodb"><a href="#1-连接数据库-mongodb" class="headerlink" title="1.连接数据库(mongodb)"></a>1.连接数据库(<code>mongodb</code>)</h2><p>由于之前的代码习惯, 成功连接数据库, MQ 等, 都喜欢输出一句 log (connect to xxxxxxx), 并且捕捉错误信息.<br>而文档中推荐的异步 provider, 代码如下:   </p>
+<pre><code class="typescript"><span class="keyword">import</span> * <span class="keyword">as</span> mongoose <span class="keyword">from</span> <span class="string">'mongoose'</span>;
+
+<span class="keyword">export</span> <span class="keyword">const</span> databaseProviders = [
+  {
+    provide: <span class="string">'DATABASE_CONNECTION'</span>,
+    useFactory: (): <span class="built_in">Promise</span>&lt;<span class="keyword">typeof</span> mongoose&gt; =&gt;
+      mongoose.connect(<span class="string">'mongodb://localhost/nest'</span>),
+  },
+];
+</code></pre>
+<p>它通过了 <code>useFactory</code> 来提供了一个异步的方法. 然后在创建模型的地方通过 <code>DATABASE_CONNECTION</code> 这个 <code>token</code> 来注入 <code>useFactory</code> 返回的连接. 由于我项目中会用到多种, 并且多个数据库. 所以我不应该用 <code>mongoose.connect</code> 来连接 <code>mongo</code> (因为这样只默认把连接保存在 mongoose.connection 上, 有多个连接的时候会覆盖), 而是应该用 <code>mongoose.createConnection</code> 来创建一个连接, 并且保存这个连接.   </p>
+<p>但是…我突然发现, <code>mongoose.createConnection</code> 的返回值类型, 不是一个 <code>Promise</code>, 而是 <code>mongoose.Connection</code>. 难道<code>mongoose.createConnection</code> 这个方法, 不是异步的吗?<br>通过简单的写了几行代码尝试:   </p>
+<pre><code class="javascript"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)
+
+<span class="keyword">const</span> connection = mongoose.createConnection(<span class="string">'mongodb://localhost:27017/test'</span>)
+connection.on(<span class="string">'open'</span>, () =&gt; {
+  <span class="built_in">console</span>.log(<span class="string">'connection open'</span>)
+})
+<span class="built_in">console</span>.log(<span class="string">'-----------------flag-----------------'</span>)
+</code></pre>
+<p>结果自然是异步的…   </p>
+<p>经过搜索发现, 虽然 <code>mongoose.connect</code> 返回的是一个 <code>Promise&lt;typeof mongoose&gt;</code>, 但是 <code>mongoose.createConnection</code> 返回的, 并不是我们平时使用的那个 <code>Promise</code>.   </p>
+<p>就像前面所说的, <code>mongoose.connect</code> , 会自动把连接保存到 <code>mongoose.connection</code> 上, 而 <code>mongoose.createConnection</code> 是直接返回一个数据库连接.<br>但尽管返回的是一个 <code>mongoose.Connection</code>, 但是却还是能把他当做一个 <code>Promise</code> 来使用.   </p>
+<pre><code class="javascript">mongoose.createConnection(<span class="string">'mongodb://localhost:27017/test'</span>).then(<span class="function"><span class="params">connection</span> =&gt;</span> {
+  <span class="comment">// do somethings...</span>
+  connection.model(<span class="string">'Test'</span>, schema);
+})
+</code></pre>
+<p>猜测应该是 <code>mongoose</code> 内部实现了一个 <code>Promise</code>, 实现不用等待连接成功就能先初始化 <code>model</code> :   </p>
+<pre><code class="javascript"><span class="keyword">const</span> connection = mongoose.createConnection(<span class="string">'mongodb://localhost:27017/test'</span>)
+connection.model(<span class="string">'Test'</span>, schema);
+</code></pre>
+<p>而由于 <code>mongoose.connect</code> 是把连接赋值给 <code>mongoose.connection</code> 的, 所以能直接取到, 并且进行初始化 <code>model</code> 的任务, 如果 <code>mongoose.createConnection</code> 返回的和 <code>mongoose.connect</code> 一样是一个 <code>Promise</code>, 那么将需要等 <code>Promise.resolve()</code> 之后, 才能拿到 <code>mongoose.connection</code> 的值, 这样就会比较浪费时间.</p>
+<p>所以我觉得, 这也不是个问题, 就算 <code>await</code> 的对象没有 <code>.then()</code> 方法, 它也不会报错.</p>
+<p><a href="https://thecodebarbarian.com/whats-new-in-mongoose-5-improved-connections" target="_blank" rel="noopener">以上参考链接: https://thecodebarbarian.com/whats-new-in-mongoose-5-improved-connections</a>   </p>
+<p>其实感觉这一部分, 和 <code>Nest.js</code> 好像并没有多大关系hhh..但是我还是把它写进来了.就当作是一个记录吧🙄   </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/05/通过thinkjs学习多进程模式/" rel="next" title="通过thinkjs学习多进程模式">
+                <i class="fa fa-chevron-left"></i> 通过thinkjs学习多进程模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zxh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-连接数据库-mongodb"><span class="nav-number">1.</span> <span class="nav-text">1.连接数据库(mongodb)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zxh</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
