@@ -118,7 +118,7 @@
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="http://qiniu.zhangxuehang.cn/image/blog2018-06-29%2021-21-04%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
 <meta property="og:image" content="http://qiniu.zhangxuehang.cn/image/blog2018-06-29%2021-25-58%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
-<meta property="og:updated_time" content="2019-10-19T09:20:57.251Z">
+<meta property="og:updated_time" content="2020-08-13T08:58:59.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018.7面试那点事儿">
 <meta name="twitter:description" content="对于这些天遇到的面试题,找一些感兴趣的敲一下,找找为什么…恩,差不多就是这样~~   浏览器的缓存和 304 ,以及 post 请求的304说到状态码 304 的缓存,也应该了解一下 200 OK (from cache) 它返回的状态码是200,但是,这次请求,浏览器是没有和服务器确认,直接使用了浏览器的缓存,所以返回的是  from cache .    当浏览器访问一个文件时,浏览器会先判断">
@@ -343,7 +343,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-19 17:20:57" itemprop="dateModified" datetime="2019-10-19T17:20:57+08:00">2019-10-19</time>
+                <time title="修改时间：2020-08-13 16:58:59" itemprop="dateModified" datetime="2020-08-13T16:58:59+08:00">2020-08-13</time>
               
             
           </span>
@@ -387,7 +387,7 @@
 <p>js:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"test"</span>)</span><br></pre></td></tr></table></figure></p>
 <p>当执行 <strong>node app.js</strong> 以后,在浏览器打开 <strong>localhost:3000</strong> ,并且在60s内多次刷新,就会看到 <strong>js.js</strong> 是从缓存中获取的,而浏览器也没有接收到 <strong>/js.js</strong>路径的请求.<br><img src="http://qiniu.zhangxuehang.cn/image/blog2018-06-29%2021-21-04%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="截图结果"><br>而在60s后再次刷新页面,就会看到,服务器收到了一次路径为 <strong>/js.js</strong> 的请求:<br><img src="http://qiniu.zhangxuehang.cn/image/blog2018-06-29%2021-25-58%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="截图结果2">   </p>
 <h2 id="map-和-parseInt-的使用"><a href="#map-和-parseInt-的使用" class="headerlink" title="map 和 parseInt 的使用"></a><strong>map</strong> 和 <strong>parseInt</strong> 的使用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>].map(<span class="built_in">parseInt</span>)</span><br></pre></td></tr></table></figure>
-<p>试了一下,答案应该是 <strong>[1,NaN,NaN]</strong> 具体原因就是 <strong>parseInt</strong> 的第二个参数,和 <strong>map</strong> 的第二个参数</p>
+<p>试了一下,答案应该是 <strong>[1,NaN,NaN]</strong> 具体原因就是 <strong>parseInt</strong> 的第二个参数,和 <strong>map</strong> 的第二个参数<br><code>Array.map</code> 的回调函数, 有三个参数, <code>currentValue</code>, <code>index</code> 和 <code>arr</code>.<br><code>parseInt</code>, 有两个参数, <code>string</code> 和 <code>radix</code>, <code>radix</code> 代表了 <code>string</code> 的进制, <code>0</code> 或者 默认为 <code>十进制</code>.<br><code>parseInt</code> 应该理解为, 把 <code>string</code> 转换成 <code>radix</code> 指定的进制. 而字符串 <code>3</code> 不是二进制. 也没有 <code>一进制</code>. 所以为 <code>NaN</code>.    </p>
 
       
     </div>
